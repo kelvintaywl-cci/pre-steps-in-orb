@@ -3,17 +3,32 @@ version: 2.1
 orbs: 
   python: circleci/python@2.0.3
 
+jobs:
+  node-script:
+    resource_class: small
+    docker:
+      - image: cimg/node:14.19
+    steps:
+      - run:
+          name: run test.js
+          shell: /usr/bin/env node
+          command: |
+            console.log('helloooooooo');
+
 workflows:
-  main:
+#   main:
+#     jobs:
+#       - python/test:
+#           args: '--dev'
+#           pkg-manager: pipenv
+#           test-tool: pytest
+#           pre-steps:
+#             - run:
+#                 name: Trip early
+#                 command: |
+#                   if [ -z "${CIRCLE_PULL_REQUEST}" ]; then
+#                     circleci step halt
+#                   fi
+  node:
     jobs:
-      - python/test:
-          args: '--dev'
-          pkg-manager: pipenv
-          test-tool: pytest
-          pre-steps:
-            - run:
-                name: Trip early
-                command: |
-                  if [ -z "${CIRCLE_PULL_REQUEST}" ]; then
-                    circleci step halt
-                  fi
+      - node-script
