@@ -10,8 +10,8 @@ jobs:
       - image: cimg/node:14.19
     steps:
       - run:
-          name: run test.js
-          shell: /usr/bin/env node
+          name: "run test.js"
+          shell: "/usr/bin/env node"
           command: |
             console.log('helloooooooo');
 
