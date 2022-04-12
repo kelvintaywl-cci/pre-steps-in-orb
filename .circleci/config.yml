@@ -1,0 +1,19 @@
+version: 2.1
+
+orbs: 
+  python: circleci/python@2.0.3
+
+workflows:
+  main:
+    jobs:
+      - python/test:
+          args: '--dev'
+          pkg-manager: pipenv
+          test-tool: pytest
+          pre-steps:
+            - run:
+                name: Trip early
+                command: |
+                  if [ -n "${CIRCLE_PULL_REQUEST}" ]; then
+                    circleci step halt
+                  fi
