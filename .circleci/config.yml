@@ -14,6 +14,6 @@ workflows:
             - run:
                 name: Trip early
                 command: |
-                  if [ -n "${CIRCLE_PULL_REQUEST}" ]; then
+                  if [ -z "${CIRCLE_PULL_REQUEST}" ]; then
                     circleci step halt
                   fi
